@@ -1,0 +1,101 @@
+.cycler {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cycler:hover {
+  color: var(--color-primary-light);
+  border-color: rgba(108, 99, 255, 0.35);
+  background: rgba(108, 99, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.08);
+}
+
+.cycler:active {
+  transform: scale(0.88);
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  animation: iconMorph 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.iconWrap svg {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes iconMorph {
+  0% {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
+  }
+  60% {
+    opacity: 0.8;
+    transform: rotate(8deg) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cycler {
+    width: 30px;
+    height: 30px;
+  }
+
+  .iconWrap,
+  .iconWrap svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (min-width: 1601px) {
+  .cycler {
+    width: 36px;
+    height: 36px;
+  }
+
+  .iconWrap,
+  .iconWrap svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (min-width: 2561px) {
+  .cycler {
+    width: 40px;
+    height: 40px;
+  }
+
+  .iconWrap,
+  .iconWrap svg {
+    width: 20px;
+    height: 20px;
+  }
+}

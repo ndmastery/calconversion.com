@@ -1,0 +1,236 @@
+.section {
+  position: relative;
+  padding: var(--space-3xl) 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.backdropOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  will-change: transform;
+  animation: orbDrift 20s ease-in-out infinite;
+}
+
+.backdropOrb:nth-child(1) {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.12), transparent 70%);
+  top: -15%;
+  right: 10%;
+}
+
+.backdropOrb:nth-child(2) {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(66, 165, 245, 0.08), transparent 70%);
+  bottom: -10%;
+  left: 5%;
+  animation-delay: -7s;
+  animation-duration: 25s;
+}
+
+.backdropOrb:nth-child(3) {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(171, 71, 188, 0.07), transparent 70%);
+  top: 50%;
+  left: 40%;
+  animation-delay: -14s;
+  animation-duration: 28s;
+}
+
+.frame {
+  position: relative;
+  z-index: 1;
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-primary-light);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(108, 99, 255, 0.08);
+  border: 1px solid rgba(108, 99, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  width: fit-content;
+}
+
+.eyebrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+.headline {
+  font-size: var(--text-5xl);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.headlineAccent {
+  display: block;
+  background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end), var(--color-distance-start));
+  background-size: 200% 200%;
+  animation: gradientText 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.description {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+  max-width: 480px;
+}
+
+.showcaseCol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.revealUp {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+  opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.revealLeft {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition:
+  opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.revealRight {
+  opacity: 0;
+  transform: translateX(28px);
+  transition:
+  opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.delay1 {
+  transition-delay: 80ms;
+}
+
+.delay2 {
+  transition-delay: 160ms;
+}
+
+.delay3 {
+  transition-delay: 240ms;
+}
+
+.delay4 {
+  transition-delay: 320ms;
+}
+
+.delay5 {
+  transition-delay: 400ms;
+}
+
+@media (max-width: 1024px) {
+  .contentCol {
+    align-items: center;
+    text-align: center;
+  }
+  .description {
+    max-width: 540px;
+  }
+  .headline {
+    font-size: var(--text-4xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .headline {
+    font-size: var(--text-3xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: var(--text-2xl);
+  }
+  .description {
+    font-size: var(--text-sm);
+  }
+  .backdropOrb:nth-child(1) {
+    width: 300px;
+    height: 300px;
+  }
+  .backdropOrb:nth-child(2) {
+    width: 220px;
+    height: 220px;
+  }
+  .backdropOrb:nth-child(3) {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .headline {
+    font-size: var(--text-6xl);
+  }
+  .description {
+    font-size: var(--text-lg);
+    max-width: 560px;
+  }
+  .backdropOrb:nth-child(1) {
+    width: 900px;
+    height: 900px;
+  }
+  .backdropOrb:nth-child(2) {
+    width: 700px;
+    height: 700px;
+  }
+  .backdropOrb:nth-child(3) {
+    width: 550px;
+    height: 550px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdropOrb {
+    animation: none;
+  }
+  .headlineAccent {
+    animation: none;
+  }
+  .revealUp,
+  .revealLeft,
+  .revealRight {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

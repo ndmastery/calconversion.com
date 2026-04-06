@@ -1,0 +1,203 @@
+.gwPathwayGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: var(--space-lg);
+}
+
+.gwPathwayCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xl);
+  border-radius: 16px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  transition:
+  border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.gwPathwayCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg,
+  transparent,
+  rgba(108, 99, 255, 0.25),
+  transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gwPathwayCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(108, 99, 255, 0.2);
+  box-shadow:
+  0 12px 40px rgba(108, 99, 255, 0.08),
+  0 0 0 1px rgba(108, 99, 255, 0.06);
+  background: var(--color-bg-tertiary);
+}
+
+.gwPathwayCard:hover::before {
+  opacity: 1;
+}
+
+.gwPathwayIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg,
+  rgba(108, 99, 255, 0.12),
+  rgba(59, 130, 246, 0.08));
+  border: 1px solid rgba(108, 99, 255, 0.15);
+  margin-bottom: var(--space-md);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gwPathwayIconAlt {
+  background: linear-gradient(135deg,
+  rgba(59, 130, 246, 0.12),
+  rgba(108, 99, 255, 0.08));
+  border-color: rgba(59, 130, 246, 0.15);
+}
+
+.gwPathwayCard:hover .gwPathwayIconWrap {
+  transform: scale(1.08);
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.2);
+}
+
+.gwPathwayIcon {
+  width: 26px;
+  height: 26px;
+  color: var(--color-primary-light);
+}
+
+.gwPathwayTitle {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.01em;
+}
+
+.gwPathwayDesc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: var(--space-lg);
+}
+
+.gwPathwayCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
+  text-decoration: none;
+  transition:
+  transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  filter 0.3s ease;
+  align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.gwPathwayCta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+  rgba(255, 255, 255, 0.15) 0%,
+  transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gwPathwayCta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(108, 99, 255, 0.35);
+  filter: brightness(1.08);
+}
+
+.gwPathwayCta:hover::before {
+  opacity: 1;
+}
+
+.gwPathwayCta:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.2);
+}
+
+.gwPathwayCtaAlt {
+  background: linear-gradient(135deg, var(--color-primary-end), var(--color-primary-start));
+}
+
+.gwCtaArrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  flex-shrink: 0;
+}
+
+.gwPathwayCta:hover .gwCtaArrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 900px) {
+  .gwPathwayGrid {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .gwPathwayGrid {
+    grid-template-columns: 1fr;
+  }
+  .gwPathwayCard {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 400px) {
+  .gwPathwayCard {
+    padding: var(--space-md);
+    border-radius: 12px;
+  }
+  .gwPathwayCta {
+    padding: 10px 16px;
+    font-size: var(--text-xs);
+  }
+}
+
+@media (max-width: 280px) {
+  .gwPathwayCard {
+    padding: var(--space-sm);
+    border-radius: 8px;
+  }
+  .gwPathwayIconWrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  .gwPathwayIcon {
+    width: 20px;
+    height: 20px;
+  }
+}

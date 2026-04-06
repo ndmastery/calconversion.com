@@ -1,0 +1,13 @@
+.theater {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  z-index: 2;
+  animation: theaterEnter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@media (max-width: 1024px) {
+  .theater {
+    justify-content: center;
+  }
+}

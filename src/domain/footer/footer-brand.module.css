@@ -1,0 +1,159 @@
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.brandIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+}
+
+.brandIcon svg {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.brandName {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--color-text), var(--color-text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brandTagline {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 340px;
+}
+
+.socialRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--space-xs);
+}
+
+.socialLink {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, background, color, box-shadow;
+}
+
+.socialLink svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.socialLink:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  border-color: transparent;
+}
+
+.socialLink:hover svg {
+  transform: scale(1.15);
+}
+
+.socialLinkedin:hover {
+  background: #0077B5;
+  box-shadow: 0 4px 20px rgba(0, 119, 181, 0.35);
+}
+
+@media (max-width: 1024px) {
+  .brandColumn {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 380px) {
+  .socialLink {
+    width: 32px;
+    height: 32px;
+  }
+  .socialLink svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .brandTagline {
+    max-width: 420px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .brandIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+  }
+  .brandIcon svg {
+    width: 26px;
+    height: 26px;
+  }
+  .brandName {
+    font-size: var(--text-2xl);
+  }
+  .socialLink {
+    width: 44px;
+    height: 44px;
+  }
+  .socialLink svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .brandIcon {
+    width: 56px;
+    height: 56px;
+  }
+  .brandIcon svg {
+    width: 32px;
+    height: 32px;
+  }
+  .socialLink {
+    width: 52px;
+    height: 52px;
+  }
+  .socialLink svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .socialLink:hover {
+    transform: none;
+  }
+}

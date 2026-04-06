@@ -1,0 +1,30 @@
+@media print {
+.page::before,
+  .page::after {
+    display: none;
+  }
+
+  .sidebar,
+  .mobileNavToggle,
+  .mobileDrawer,
+  .mobileDrawerOverlay {
+    display: none !important;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .sectionCard {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    animation: none;
+  }
+
+  .heroBanner {
+    background: none;
+    border: 1px solid #ccc;
+  }
+}

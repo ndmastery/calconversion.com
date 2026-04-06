@@ -1,0 +1,105 @@
+.pillScroller {
+  display: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-md) var(--space-sm);
+  gap: 8px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.pillScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.pill:hover {
+  background: var(--color-bg-card);
+}
+
+.pillActive {
+  background: color-mix(in srgb, var(--pill-accent, var(--color-primary)) 12%, var(--color-bg-card));
+  border-color: color-mix(in srgb, var(--pill-accent, var(--color-primary)) 30%, transparent);
+  transform: scale(1.02);
+}
+
+.pill svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--pill-accent, var(--color-primary));
+}
+
+.pillLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.highlightChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: border-color 0.25s ease;
+}
+
+.highlightChip:hover {
+  border-color: color-mix(in srgb, var(--feature-accent, var(--color-primary)) 30%, var(--color-border));
+}
+
+.highlightChip svg {
+  width: 12px;
+  height: 12px;
+  color: var(--feature-accent, var(--color-primary));
+  flex-shrink: 0;
+  transition: color 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .pillScroller {
+    display: flex;
+  }
+}
+
+@media (max-width: 380px) {
+  .pill {
+    padding: 6px 10px;
+  }
+  .pillLabel {
+    font-size: 10px;
+  }
+  .highlights {
+    gap: 4px;
+  }
+  .highlightChip {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+}

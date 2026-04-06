@@ -1,0 +1,137 @@
+:root {
+  --color-primary-start: #6C63FF;
+  --color-primary-end: #3B82F6;
+  --color-primary: #6C63FF;
+  --color-primary-light: #8B85FF;
+
+  --color-currency-start: #66BB6A;
+  --color-currency-end: #2E7D32;
+  --color-distance-start: #42A5F5;
+  --color-distance-end: #1565C0;
+  --color-apparel-start: #AB47BC;
+  --color-apparel-end: #6A1B9A;
+  --color-storage-start: #26C6DA;
+  --color-storage-end: #00838F;
+  --color-mass-start: #FFA726;
+  --color-mass-end: #E65100;
+
+  --color-success: #4CAF50;
+  --color-error: #EF5350;
+  --color-muted: #6B7280;
+
+  --color-bg: #0A0A0F;
+  --color-bg-secondary: #12121A;
+  --color-bg-tertiary: #1A1A26;
+  --color-bg-card: #16161F;
+  --color-bg-glass: rgba(22, 22, 31, 0.7);
+
+  --color-text: #F0F0F5;
+  --color-text-secondary: #A0A0B4;
+  --color-text-muted: #6B6B80;
+
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-light: rgba(255, 255, 255, 0.12);
+
+  --text-xs: clamp(0.6875rem, 0.65rem + 0.15vw, 0.75rem);
+  --text-sm: clamp(0.8125rem, 0.78rem + 0.13vw, 0.875rem);
+  --text-base: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+  --text-lg: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --text-xl: clamp(1.1875rem, 1.1rem + 0.35vw, 1.25rem);
+  --text-2xl: clamp(1.375rem, 1.2rem + 0.7vw, 1.5rem);
+  --text-3xl: clamp(1.625rem, 1.35rem + 1.1vw, 1.875rem);
+  --text-4xl: clamp(2rem, 1.6rem + 1.6vw, 2.25rem);
+  --text-5xl: clamp(2.5rem, 1.9rem + 2.4vw, 3rem);
+  --text-6xl: clamp(3rem, 2.2rem + 3.2vw, 3.75rem);
+
+  --space-xs: clamp(0.25rem, 0.2rem + 0.2vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 0.4rem + 0.4vw, 0.75rem);
+  --space-md: clamp(0.75rem, 0.6rem + 0.6vw, 1rem);
+  --space-lg: clamp(1rem, 0.8rem + 0.8vw, 1.5rem);
+  --space-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --space-2xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --space-3xl: clamp(3rem, 2rem + 4vw, 5rem);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  --z-header: 100;
+  --z-mobile-menu: 150;
+  --z-overlay: 200;
+
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --content-max-width: 1600px;
+
+  --header-bg-scrolled: rgba(10, 10, 15, 0.85);
+
+  --header-capsule-bg: rgba(14, 14, 20, 0.72);
+  --header-capsule-border: rgba(108, 99, 255, 0.12);
+  --header-capsule-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(108, 99, 255, 0.06);
+  --header-highlight-bg: rgba(108, 99, 255, 0.1);
+  --header-badge-glow: rgba(108, 99, 255, 0.35);
+}
+
+[data-theme="light"] {
+  --color-bg: #F5F5FA;
+  --color-bg-secondary: #EEEEF4;
+  --color-bg-tertiary: #E4E4EC;
+  --color-bg-card: #FFFFFF;
+  --color-bg-glass: rgba(255, 255, 255, 0.8);
+
+  --color-text: #1A1A2E;
+  --color-text-secondary: #4A4A64;
+  --color-text-muted: #8A8AA0;
+
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-light: rgba(0, 0, 0, 0.12);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+  --header-bg-scrolled: rgba(245, 245, 250, 0.9);
+
+  --header-capsule-bg: rgba(255, 255, 255, 0.78);
+  --header-capsule-border: rgba(108, 99, 255, 0.15);
+  --header-capsule-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(108, 99, 255, 0.08);
+  --header-highlight-bg: rgba(108, 99, 255, 0.08);
+  --header-badge-glow: rgba(108, 99, 255, 0.25);
+}
+
+[data-theme="amoled"] {
+  --color-bg: #000000;
+  --color-bg-secondary: #050508;
+  --color-bg-tertiary: #0A0A0E;
+  --color-bg-card: #080810;
+  --color-bg-glass: rgba(0, 0, 0, 0.85);
+
+  --color-text: #EAEAEF;
+  --color-text-secondary: #9090A4;
+  --color-text-muted: #5A5A6E;
+
+  --color-border: rgba(255, 255, 255, 0.05);
+  --color-border-light: rgba(255, 255, 255, 0.08);
+
+  --shadow-sm: 0 0 0 rgba(0, 0, 0, 0);
+  --shadow-md: 0 0 0 rgba(0, 0, 0, 0);
+  --shadow-lg: 0 0 0 rgba(0, 0, 0, 0);
+
+  --header-bg-scrolled: rgba(0, 0, 0, 0.92);
+
+  --header-capsule-bg: rgba(0, 0, 0, 0.82);
+  --header-capsule-border: rgba(108, 99, 255, 0.1);
+  --header-capsule-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(108, 99, 255, 0.05);
+  --header-highlight-bg: rgba(108, 99, 255, 0.08);
+  --header-badge-glow: rgba(108, 99, 255, 0.3);
+}
+

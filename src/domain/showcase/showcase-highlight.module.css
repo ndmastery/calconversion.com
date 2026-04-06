@@ -1,0 +1,96 @@
+.connectorFilled .timelineConnectorFill {
+  width: 100%;
+}
+
+.highlightsBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-2xl);
+  border-top: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--showcase-color) 3%, var(--color-bg-card));
+  flex-wrap: wrap;
+}
+
+.highlightsLabel {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.highlightPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--showcase-color) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--showcase-color) 15%, transparent);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--showcase-color);
+  white-space: nowrap;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlightPill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--showcase-color) 15%, transparent);
+}
+
+.highlightDiamond {
+  width: 6px;
+  height: 6px;
+  background: var(--showcase-color);
+  transform: rotate(45deg);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.highlightPill:nth-child(2) {
+  animation: pillEnter 0.4s cubic-bezier(0.33, 1, 0.68, 1) 0.4s both;
+}
+
+.highlightPill:nth-child(3) {
+  animation: pillEnter 0.4s cubic-bezier(0.33, 1, 0.68, 1) 0.5s both;
+}
+
+.highlightPill:nth-child(4) {
+  animation: pillEnter 0.4s cubic-bezier(0.33, 1, 0.68, 1) 0.6s both;
+}
+
+@media (max-width: 1024px) {
+  .highlightsBar {
+    padding: var(--space-md) var(--space-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .highlightsBar {
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .highlightsBar {
+    padding: var(--space-sm) var(--space-lg);
+    gap: 6px;
+  }
+  .highlightPill {
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+  .highlightsLabel {
+    display: none;
+  }
+}
+
+@media (min-width: 3840px) {
+  .highlightPill {
+    font-size: var(--text-sm);
+    padding: 8px 20px;
+  }
+}

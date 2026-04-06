@@ -1,0 +1,63 @@
+@keyframes orbDrift {
+0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(25px, -18px) scale(1.06); }
+  66% { transform: translate(-18px, 22px) scale(0.94); }
+}
+
+@keyframes gradientText {
+0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.trustRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: var(--space-xs);
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.trustIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(102, 187, 106, 0.12);
+  color: #66BB6A;
+}
+
+.trustIcon svg {
+  width: 12px;
+  height: 12px;
+}
+
+@keyframes ctaShimmer {
+from { background-position: 200% center; }
+  to { background-position: -200% center; }
+}
+
+@keyframes livePulse {
+0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(102, 187, 106, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 8px 3px rgba(102, 187, 106, 0.2); }
+}
+
+.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@media (max-width: 1024px) {
+  .trustRow {
+    align-items: center;
+  }
+}

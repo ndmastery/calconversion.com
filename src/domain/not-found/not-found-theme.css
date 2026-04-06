@@ -1,0 +1,91 @@
+[data-theme="light"] .nf__hero {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="light"] .nf__hero-mesh {
+  opacity: 0.08;
+}
+
+[data-theme="light"] .nf__hero-dots {
+  opacity: 0.04;
+}
+
+[data-theme="light"] .nf__hero-num {
+  opacity: 0.04;
+}
+
+[data-theme="light"] .nf__hero-num::after {
+  opacity: 0.3;
+}
+
+[data-theme="light"] .nf__url-tag {
+  color: #fff;
+}
+
+[data-theme="light"] .nf__bar:hover {
+  background: color-mix(in srgb, var(--bar-c, var(--nf-primary)) 4%, transparent);
+}
+
+[data-theme="amoled"] .nf__hero {
+  background: #000;
+}
+
+[data-theme="amoled"] .nf__hero-mesh {
+  opacity: 0.06;
+}
+
+[data-theme="amoled"] .nf__hero-dots {
+  opacity: 0.03;
+}
+
+[data-theme="amoled"] .nf__hero-num::after {
+  opacity: 0.3;
+}
+
+[data-theme="amoled"] .nf__bar:hover {
+  background: color-mix(in srgb, var(--bar-c, var(--nf-primary)) 4%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf__hero-mesh,
+  .nf__scan,
+  .nf__badge-indicator,
+  .nf__hero-num::after {
+    animation: none !important;
+  }
+
+  .nf__hero-num,
+  .nf__badge,
+  .nf__title,
+  .nf__desc,
+  .nf__divider,
+  .nf__url,
+  .nf__bars,
+  .nf__actions,
+  .nf__footnote,
+  .nf__hero-label,
+  .nf__hero-coord {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .nf__hero-mesh {
+    opacity: 0.08 !important;
+  }
+
+  .nf__hero-num {
+    opacity: 0.06 !important;
+  }
+
+  .nf__hero-num::after {
+    opacity: 0.35 !important;
+  }
+
+  .nf__scan {
+    display: none;
+  }
+
+  .nf__badge-indicator {
+    opacity: 1 !important;
+  }
+}

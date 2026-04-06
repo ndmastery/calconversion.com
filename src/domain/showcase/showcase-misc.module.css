@@ -1,0 +1,222 @@
+.timeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: var(--space-2xl);
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--space-xl);
+}
+
+.timelineNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  min-width: 80px;
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.timelineNode:hover {
+  transform: translateY(-2px);
+}
+
+.timelineOrb {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+  border: 2px solid var(--color-border-light);
+  transition:
+  background 0.4s cubic-bezier(0.33, 1, 0.68, 1),
+  border-color 0.4s ease,
+  box-shadow 0.4s ease,
+  transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.timelineOrb svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+  transition: color 0.4s ease;
+}
+
+.timelineNodeActive .timelineOrb {
+  background: linear-gradient(135deg, var(--node-color), color-mix(in srgb, var(--node-color) 70%, #000));
+  border-color: var(--node-color);
+  box-shadow:
+  0 0 20px color-mix(in srgb, var(--node-color) 30%, transparent),
+  0 4px 16px color-mix(in srgb, var(--node-color) 20%, transparent);
+  transform: scale(1.15);
+}
+
+.timelineNodeActive .timelineOrb svg {
+  color: #fff;
+}
+
+.timelineLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color 0.4s ease;
+  white-space: nowrap;
+}
+
+.timelineNodeActive .timelineLabel {
+  color: var(--node-color);
+}
+
+.timelineConnector {
+  flex: 1;
+  max-width: 80px;
+  height: 2px;
+  background: var(--color-border);
+  position: relative;
+  margin: 0 -4px;
+  align-self: flex-start;
+  margin-top: 27px;
+}
+
+.timelineConnectorFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--connector-color, var(--color-primary));
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@keyframes cardReveal {
+from {
+    opacity: 0;
+    clip-path: inset(8% 4% 8% 4% round 16px);
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0% 0% 0% 0% round 16px);
+    transform: scale(1);
+  }
+}
+
+@keyframes scenarioOrbFloat {
+0%, 100% { transform: translate(-50%, -60%) scale(1); }
+  50% { transform: translate(-50%, -65%) scale(1.1); }
+}
+
+@keyframes iconEntrance {
+from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes textSlideUp {
+from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes paneSlideIn {
+from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pillEnter {
+from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1024px) {
+  .timelineConnector {
+    max-width: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .timelineConnector {
+    max-width: 32px;
+  }
+  .timelineLabel {
+    font-size: 9px;
+  }
+  .timelineOrb {
+    width: 34px;
+    height: 34px;
+  }
+  .timelineOrb svg {
+    width: 14px;
+    height: 14px;
+  }
+  .timelineNode {
+    min-width: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timelineLabel {
+    display: none;
+  }
+  .timelineOrb {
+    width: 28px;
+    height: 28px;
+  }
+  .timelineOrb svg {
+    width: 12px;
+    height: 12px;
+  }
+  .timelineNode {
+    min-width: 36px;
+    gap: 6px;
+  }
+  .timelineConnector {
+    max-width: 24px;
+  }
+  .timeline {
+    padding: 0 var(--space-md);
+  }
+}
+
+@media (min-width: 1441px) {
+  .timelineConnector {
+    max-width: 100px;
+  }
+  .timelineNode {
+    min-width: 100px;
+  }
+}
+
+@media (min-width: 2561px) {
+  .timelineOrb {
+    width: 52px;
+    height: 52px;
+  }
+  .timelineOrb svg {
+    width: 22px;
+    height: 22px;
+  }
+  .timelineLabel {
+    font-size: 13px;
+  }
+  .timelineConnector {
+    max-width: 140px;
+  }
+}

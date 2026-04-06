@@ -1,0 +1,77 @@
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+  transition: background var(--transition-fast), color var(--transition-fast);
+  position: relative;
+  cursor: pointer;
+}
+
+.hamburger:hover {
+  background: var(--header-highlight-bg);
+}
+
+.hamburgerLine {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: var(--radius-full);
+  transition:
+  transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+  opacity 0.25s ease,
+  width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: absolute;
+}
+
+.hamburgerLine:nth-child(1) {
+  transform: translateY(-6px);
+}
+
+.hamburgerLine:nth-child(2) {
+  width: 16px;
+}
+
+.hamburgerLine:nth-child(3) {
+  transform: translateY(6px);
+}
+
+.hamburger[data-open="true"] .hamburgerLine:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.hamburger[data-open="true"] .hamburgerLine:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.hamburger[data-open="true"] .hamburgerLine:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* Show hamburger on mobile + all tablets */
+@media (max-width: 1024px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 320px) {
+  .hamburger {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hamburger {
+    display: flex;
+    width: 36px;
+    height: 36px;
+  }
+}

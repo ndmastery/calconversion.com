@@ -1,0 +1,136 @@
+.contactGateway {
+  overflow: hidden;
+}
+
+.gwHero {
+  position: relative;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-xl);
+  border-radius: 16px;
+  background: linear-gradient(145deg,
+  rgba(108, 99, 255, 0.08) 0%,
+  rgba(59, 130, 246, 0.05) 40%,
+  rgba(108, 99, 255, 0.03) 100%);
+  border: 1px solid rgba(108, 99, 255, 0.1);
+  overflow: hidden;
+}
+
+.gwHeroGlow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.18) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  animation: gwGlowPulse 4s ease-in-out infinite;
+}
+
+@keyframes gwGlowPulse {
+0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+}
+
+.gwHeroIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,
+  rgba(108, 99, 255, 0.15),
+  rgba(59, 130, 246, 0.1));
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  margin-bottom: var(--space-lg);
+  position: relative;
+  z-index: 1;
+  animation: gwIconFloat 6s ease-in-out infinite;
+}
+
+@keyframes gwIconFloat {
+0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.gwHeroIcon {
+  width: 36px;
+  height: 36px;
+  color: var(--color-primary-light);
+}
+
+.gwHeroTitle {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.gwHeroSubtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .gwHero {
+    padding: var(--space-xl) var(--space-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .gwHero {
+    padding: var(--space-xl) var(--space-md);
+  }
+  .gwHeroIconWrap {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+  }
+  .gwHeroIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 400px) {
+  .gwHero {
+    padding: var(--space-lg) var(--space-sm);
+    border-radius: 12px;
+  }
+  .gwHeroTitle {
+    font-size: var(--text-xl);
+  }
+  .gwHeroSubtitle {
+    font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 280px) {
+  .gwHero {
+    padding: var(--space-md) var(--space-xs);
+    border-radius: 8px;
+  }
+  .gwHeroIconWrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+  .gwHeroIcon {
+    width: 24px;
+    height: 24px;
+  }
+  .gwHeroTitle {
+    font-size: var(--text-lg);
+  }
+}

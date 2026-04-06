@@ -1,0 +1,357 @@
+/* ============================================================
+   Support — "Frosted Prism" Button
+   A glassmorphic companion to the Aurora Prism download button.
+   Features animated gradient border, internal orb glow,
+   and crystalline depth effects.
+   ============================================================ */
+
+.wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* ------- Core Button ------- */
+.cta {
+  --btn-h: 36px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--btn-h);
+  padding: 0 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  line-height: 1;
+  box-sizing: border-box;
+  isolation: isolate;
+  background: transparent;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.3s ease;
+}
+
+/* ------- Animated Gradient Border ------- */
+.ctaBorder {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(108, 99, 255, 0.25) 0%,
+    rgba(168, 85, 247, 0.2) 35%,
+    rgba(59, 130, 246, 0.15) 65%,
+    rgba(108, 99, 255, 0.25) 100%
+  );
+  background-size: 300% 300%;
+  animation: borderWave 6s ease infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+
+/* Glass fill */
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  z-index: -1;
+}
+
+/* Holographic shimmer overlay */
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(108, 99, 255, 0) 40%,
+    rgba(108, 99, 255, 0.06) 50%,
+    rgba(168, 85, 247, 0.04) 55%,
+    transparent 100%
+  );
+  background-size: 300% 100%;
+  background-position: 200% 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: none;
+}
+
+/* ------- Internal Orb Glow ------- */
+.ctaOrb {
+  position: absolute;
+  width: 60%;
+  height: 160%;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(108, 99, 255, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+/* ------- Content ------- */
+.ctaContent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ------- Icon ------- */
+.ctaIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+/* ------- Label ------- */
+.ctaLabel {
+  position: relative;
+}
+
+/* ------- Hover States ------- */
+.cta:hover {
+  transform: translateY(-2px);
+  color: var(--color-primary-light);
+  box-shadow:
+    0 4px 20px rgba(108, 99, 255, 0.12),
+    0 8px 32px rgba(108, 99, 255, 0.06);
+}
+
+.cta:hover .ctaBorder {
+  background: linear-gradient(
+    135deg,
+    rgba(108, 99, 255, 0.45) 0%,
+    rgba(168, 85, 247, 0.4) 35%,
+    rgba(59, 130, 246, 0.35) 65%,
+    rgba(108, 99, 255, 0.45) 100%
+  );
+  background-size: 300% 300%;
+  animation: borderWave 3s ease infinite;
+}
+
+.cta:hover::after {
+  animation: shimmerSweep 2s ease-in-out;
+}
+
+.cta:hover .ctaOrb {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(108, 99, 255, 0.15) 0%,
+    rgba(168, 85, 247, 0.05) 50%,
+    transparent 70%
+  );
+}
+
+.cta:hover .ctaIcon {
+  transform: rotate(12deg) scale(1.15);
+  opacity: 1;
+}
+
+.cta:active {
+  transform: translateY(0) scale(0.96);
+  transition-duration: 0.1s;
+}
+
+/* ------- Animations ------- */
+@keyframes borderWave {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmerSweep {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Hidden on mobile ≤ 768px */
+@media (max-width: 768px) {
+  .wrapper {
+    display: none;
+  }
+}
+
+/* Large tablet: 769–1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cta {
+    --btn-h: 34px;
+    padding: 0 14px;
+    font-size: 0.74rem;
+  }
+  .ctaContent {
+    gap: 5px;
+  }
+  .ctaIcon {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+/* Small desktop: 1025–1280px */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .cta {
+    --btn-h: 34px;
+    padding: 0 15px;
+    font-size: 0.78rem;
+  }
+  .ctaContent {
+    gap: 5px;
+  }
+  .ctaIcon {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+/* Standard desktop: 1281–1440px */
+@media (min-width: 1281px) and (max-width: 1440px) {
+  .cta {
+    --btn-h: 36px;
+    padding: 0 18px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Larger displays: 1441–1600px */
+@media (min-width: 1441px) and (max-width: 1600px) {
+  .cta {
+    --btn-h: 38px;
+    padding: 0 20px;
+    font-size: 0.84rem;
+  }
+}
+
+/* Ultra-wide: 1601px+ */
+@media (min-width: 1601px) {
+  .cta {
+    --btn-h: 40px;
+    padding: 0 24px;
+    font-size: var(--text-sm);
+    gap: 7px;
+  }
+  .ctaIcon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* 4K: 2561px+ */
+@media (min-width: 2561px) {
+  .cta {
+    --btn-h: 48px;
+    padding: 0 30px;
+    font-size: var(--text-base);
+    gap: 9px;
+  }
+  .ctaIcon {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* 8K: 3841px+ */
+@media (min-width: 3841px) {
+  .cta {
+    --btn-h: 58px;
+    padding: 0 40px;
+    font-size: 1.1rem;
+    gap: 12px;
+  }
+  .ctaIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Ultra-small: ≤ 320px */
+@media (max-width: 320px) {
+  .wrapper {
+    display: none;
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .wrapper {
+    display: none;
+  }
+}
+
+/* TV / large viewport */
+@media (min-width: 1921px) and (min-height: 1080px) {
+  .cta {
+    --btn-h: 42px;
+    padding: 0 26px;
+    font-size: 0.88rem;
+    gap: 8px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ctaBorder {
+    animation: none;
+  }
+  .cta::after {
+    animation: none;
+  }
+  .cta,
+  .ctaIcon,
+  .ctaOrb {
+    transition: none;
+  }
+  .cta:hover {
+    transform: none;
+  }
+  .cta:active {
+    transform: none;
+  }
+  .cta:hover .ctaBorder {
+    animation: none;
+  }
+  .cta:hover::after {
+    animation: none;
+  }
+  .cta:hover .ctaIcon {
+    transform: none;
+  }
+}

@@ -1,0 +1,192 @@
+.mobileNavToggle {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  box-shadow:
+  0 4px 20px rgba(108, 99, 255, 0.35),
+  0 0 0 4px rgba(108, 99, 255, 0.1);
+  transition:
+  transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  align-items: center;
+  justify-content: center;
+  animation: fabPulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fabPulse {
+0%, 100% {
+    box-shadow:
+      0 4px 20px rgba(108, 99, 255, 0.35),
+      0 0 0 4px rgba(108, 99, 255, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 6px 28px rgba(108, 99, 255, 0.45),
+      0 0 0 8px rgba(108, 99, 255, 0.08),
+      0 0 0 14px rgba(108, 99, 255, 0.03);
+    transform: scale(1.05);
+  }
+}
+
+.mobileNavToggle:hover {
+  transform: scale(1.1);
+  box-shadow:
+  0 6px 30px rgba(108, 99, 255, 0.5),
+  0 0 0 6px rgba(108, 99, 255, 0.15);
+  animation: none;
+}
+
+.mobileNavToggle:active {
+  transform: scale(0.95);
+  animation: none;
+}
+
+.mobileNavIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.mobileDrawerOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mobileDrawerOverlayOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileDrawer {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  max-height: 70vh;
+  border-radius: 24px 24px 0 0;
+  background: var(--color-bg-card);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.3);
+  padding: var(--space-lg) var(--space-xl) var(--space-3xl);
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.mobileDrawerOpen {
+  transform: translateY(0);
+}
+
+.mobileDrawerHandle {
+  width: 36px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-muted);
+  margin: 0 auto var(--space-lg);
+  opacity: 0.3;
+}
+
+.mobileDrawerTitle {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.mobileNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobileNavItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+  font-family: var(--font-family);
+  transition:
+  background 0.2s ease,
+  color 0.2s ease;
+}
+
+.mobileNavItem:hover {
+  background: rgba(108, 99, 255, 0.06);
+  color: var(--color-text);
+}
+
+.mobileNavItemActive {
+  background: rgba(108, 99, 255, 0.1);
+  color: var(--color-primary-light);
+  font-weight: 600;
+}
+
+.mobileNavItemIcon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+}
+
+.mobileNavItemActive .mobileNavItemIcon {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .mobileNavToggle {
+    display: flex;
+  }
+  .mobileDrawerOverlay {
+    display: block;
+  }
+  .mobileDrawer {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .mobileNavToggle {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 280px) {
+  .mobileNavToggle {
+    width: 40px;
+    height: 40px;
+    bottom: 8px;
+    right: 8px;
+    border-radius: 12px;
+  }
+}

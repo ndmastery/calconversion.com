@@ -1,0 +1,341 @@
+/* ============================================================
+   Get the App — "Aurora Prism" Button
+   A premium holographic button with animated gradient border,
+   depth layers, and kinetic micro-interactions.
+   ============================================================ */
+
+.wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* ------- Core Button ------- */
+.cta {
+  --btn-h: 36px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--btn-h);
+  padding: 0 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  line-height: 1;
+  box-sizing: border-box;
+  isolation: isolate;
+  background:
+    linear-gradient(
+      135deg,
+      hsl(254, 88%, 60%) 0%,
+      hsl(270, 76%, 54%) 35%,
+      hsl(290, 72%, 50%) 65%,
+      hsl(320, 80%, 56%) 100%
+    );
+  background-size: 250% 250%;
+  animation: auroraShift 8s ease infinite;
+  box-shadow:
+    0 1px 3px rgba(108, 99, 255, 0.3),
+    0 4px 16px rgba(168, 85, 247, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.3s ease;
+}
+
+/* Animated holographic border ring */
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    hsl(254, 90%, 68%),
+    hsl(290, 70%, 56%),
+    hsl(340, 80%, 62%),
+    hsl(20, 90%, 60%),
+    hsl(45, 95%, 62%),
+    hsl(160, 65%, 52%),
+    hsl(220, 80%, 60%),
+    hsl(254, 90%, 68%)
+  );
+  background-size: 100% 100%;
+  animation: borderRotate 4s linear infinite;
+  z-index: -2;
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 0.5s ease;
+}
+
+/* Solid inner mask */
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  background-size: inherit;
+  animation: inherit;
+  z-index: -1;
+}
+
+/* ------- Glow Orb ------- */
+.ctaGlow {
+  position: absolute;
+  width: 120%;
+  height: 200%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(168, 85, 247, 0.35) 0%,
+    rgba(108, 99, 255, 0.15) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  filter: blur(14px);
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -3;
+}
+
+/* ------- Content Container ------- */
+.ctaContent {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ------- Icon ------- */
+.ctaIcon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  opacity: 0.9;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+/* ------- Text ------- */
+.ctaText {
+  position: relative;
+}
+
+/* ------- Chevron ------- */
+.ctaChevron {
+  display: inline-flex;
+  align-items: center;
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease 0.05s;
+}
+
+.ctaChevron svg {
+  width: 6px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+/* ------- Hover States ------- */
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 12px rgba(108, 99, 255, 0.35),
+    0 8px 32px rgba(168, 85, 247, 0.25),
+    0 16px 48px rgba(108, 99, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  filter: brightness(1.08);
+}
+
+.cta:hover::before {
+  opacity: 1;
+}
+
+.cta:hover .ctaGlow {
+  opacity: 1;
+}
+
+.cta:hover .ctaIcon {
+  transform: translateY(2px);
+  opacity: 1;
+}
+
+.cta:hover .ctaChevron {
+  width: 14px;
+  opacity: 1;
+}
+
+.cta:active {
+  transform: translateY(0) scale(0.96);
+  transition-duration: 0.1s;
+}
+
+/* ------- Animations ------- */
+@keyframes auroraShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes borderRotate {
+  from { filter: blur(5px) hue-rotate(0deg); }
+  to   { filter: blur(5px) hue-rotate(360deg); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Hidden on mobile ≤ 768px (hamburger only) */
+@media (max-width: 768px) {
+  .wrapper {
+    display: none;
+  }
+}
+
+/* Large tablet: 769–1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cta {
+    --btn-h: 34px;
+    padding: 0 16px;
+    font-size: 0.74rem;
+    gap: 4px;
+  }
+  .ctaContent {
+    gap: 5px;
+  }
+  .ctaIcon {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+/* Small desktop: 1025–1280px */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .cta {
+    --btn-h: 34px;
+    padding: 0 18px;
+    font-size: 0.78rem;
+  }
+  .ctaContent {
+    gap: 6px;
+  }
+  .ctaIcon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Standard desktop: 1281–1440px */
+@media (min-width: 1281px) and (max-width: 1440px) {
+  .cta {
+    --btn-h: 36px;
+    padding: 0 22px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Large desktop: 1441–1600px */
+@media (min-width: 1441px) and (max-width: 1600px) {
+  .cta {
+    --btn-h: 38px;
+    padding: 0 24px;
+    font-size: 0.84rem;
+  }
+}
+
+/* Ultra-wide: 1601px+ */
+@media (min-width: 1601px) {
+  .cta {
+    --btn-h: 40px;
+    padding: 0 28px;
+    font-size: var(--text-sm);
+    gap: 8px;
+  }
+  .ctaIcon {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+/* 4K: 2561px+ */
+@media (min-width: 2561px) {
+  .cta {
+    --btn-h: 48px;
+    padding: 0 36px;
+    font-size: var(--text-base);
+    gap: 10px;
+  }
+  .ctaIcon {
+    width: 20px;
+    height: 20px;
+  }
+  .ctaChevron svg {
+    width: 8px;
+    height: 14px;
+  }
+}
+
+/* 8K: 3841px+ */
+@media (min-width: 3841px) {
+  .cta {
+    --btn-h: 58px;
+    padding: 0 44px;
+    font-size: 1.1rem;
+    gap: 14px;
+  }
+  .ctaIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .wrapper {
+    display: none;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cta {
+    animation: none;
+  }
+  .cta::before {
+    animation: none;
+  }
+  .cta::after {
+    animation: none;
+  }
+  .cta,
+  .ctaIcon,
+  .ctaChevron,
+  .ctaGlow {
+    transition: none;
+  }
+  .cta:hover {
+    transform: none;
+    filter: none;
+  }
+  .cta:active {
+    transform: none;
+  }
+}

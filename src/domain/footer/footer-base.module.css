@@ -1,0 +1,134 @@
+@keyframes auroraFloat {
+0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -20px) scale(1.08);
+  }
+  50% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
+  75% {
+    transform: translate(15px, 25px) scale(1.05);
+  }
+}
+
+.topDivider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+  90deg,
+  transparent 0%,
+  var(--color-primary-start) 20%,
+  var(--color-primary-end) 50%,
+  var(--color-currency-start) 80%,
+  transparent 100%
+  );
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.pillDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pillPulse 3s ease-in-out infinite;
+}
+
+@keyframes pillPulse {
+0%, 100% {
+    opacity: 0.7;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 6px 2px currentColor;
+  }
+}
+
+.socialTwitter:hover {
+  background: #1DA1F2;
+  box-shadow: 0 4px 20px rgba(29, 161, 242, 0.35);
+}
+
+.socialGithub:hover {
+  background: #6e5494;
+  box-shadow: 0 4px 20px rgba(110, 84, 148, 0.35);
+}
+
+.socialInstagram:hover {
+  background: linear-gradient(135deg, #E1306C, #F77737);
+  box-shadow: 0 4px 20px rgba(225, 48, 108, 0.35);
+}
+
+.socialThreads:hover {
+  background: #000000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.socialTiktok:hover {
+  background: linear-gradient(135deg, #25F4EE, #FE2C55);
+  box-shadow: 0 4px 20px rgba(254, 44, 85, 0.35);
+}
+
+.versionTag {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+}
+
+.revealUp {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.revealUp.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger > .revealUp:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.stagger > .revealUp:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.stagger > .revealUp:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.stagger > .revealUp:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+.stagger > .revealUp:nth-child(5) {
+  transition-delay: 320ms;
+}
+
+@media (min-width: 3840px) {
+  .pillDot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pillDot {
+    animation: none;
+    opacity: 1;
+  }
+  .revealUp {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,8 @@
+.env
+.idea
+.vercel
+.vscode
+**/.DS_Store
+build
+node_modules
+tmp

@@ -1,0 +1,270 @@
+.dockSection {
+  width: 100%;
+}
+
+.dockLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-md);
+}
+
+.dockLabelLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-border-light), transparent);
+}
+
+.dockLabelText {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.dockBar {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  padding: 8px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: clamp(14px, 1.5vw, 20px);
+  box-shadow: var(--shadow-md);
+}
+
+.dockItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition:
+  transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+  background 0.35s ease,
+  box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+.dockItem:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+
+.dockAvailable {
+  cursor: pointer;
+}
+
+.dockAvailable:hover {
+  background: rgba(108, 99, 255, 0.06);
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.1);
+}
+
+.dockSoon {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.dockSoon:hover {
+  opacity: 0.8;
+  transform: translateY(-2px);
+  background: var(--color-bg-glass);
+}
+
+.dockIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dockItem:hover .dockIcon {
+  transform: scale(1.1);
+}
+
+.dockIconLive {
+  background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.25);
+}
+
+.dockIconSoon {
+  background: rgba(108, 99, 255, 0.06);
+  border: 1px solid var(--color-border);
+}
+
+.dockIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.dockIconLive svg {
+  color: white;
+}
+
+.dockIconSoon svg {
+  color: var(--color-text-muted);
+}
+
+.dockAvailable .dockIcon::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: calc(50% - 24px);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #66BB6A;
+  box-shadow: 0 0 6px rgba(102, 187, 106, 0.5);
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+.dockName {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.dockStatus {
+  font-size: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.dockStatusLive {
+  background: rgba(102, 187, 106, 0.1);
+  color: #66BB6A;
+  border: 1px solid rgba(102, 187, 106, 0.2);
+}
+
+.dockStatusSoon {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  min-width: 64px;
+}
+
+@media (max-width: 768px) {
+  .dockBar {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px;
+  }
+  .dockItem {
+    flex: 0 0 calc(33.33% - 4px);
+    padding: 10px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dockItem {
+    flex: 0 0 calc(33.33% - 4px);
+  }
+  .dockIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+  .dockIcon svg {
+    width: 15px;
+    height: 15px;
+  }
+  .dockName {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .dockItem {
+    flex: 0 0 calc(50% - 4px);
+  }
+  .dockBar {
+    padding: 5px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .dockIcon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+  .dockIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .dockIcon {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+  }
+  .dockIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+  .dockName {
+    font-size: 13px;
+  }
+  .dockBar {
+    border-radius: 24px;
+    padding: 12px;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .dockIcon {
+    width: 68px;
+    height: 68px;
+    border-radius: 20px;
+  }
+  .dockIcon svg {
+    width: 32px;
+    height: 32px;
+  }
+  .dockBar {
+    border-radius: 30px;
+    padding: 16px;
+    gap: 16px;
+  }
+  .dockItem {
+    padding: 18px 12px;
+  }
+  .dockName {
+    font-size: 15px;
+  }
+  .dockStatus {
+    font-size: 10px;
+    padding: 4px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dockItem:hover {
+    transform: none;
+  }
+  .dockItem:hover .dockIcon {
+    transform: none;
+  }
+}

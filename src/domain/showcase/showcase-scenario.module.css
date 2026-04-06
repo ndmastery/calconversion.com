@@ -1,0 +1,165 @@
+.scenarioCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  position: relative;
+  text-align: center;
+  border-right: 1px solid var(--color-border);
+}
+
+.scenarioCol::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+  180deg,
+  color-mix(in srgb, var(--showcase-color) 8%, transparent) 0%,
+  color-mix(in srgb, var(--showcase-color) 2%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+.scenarioCol::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(
+  circle,
+  color-mix(in srgb, var(--showcase-color) 12%, transparent) 0%,
+  transparent 70%
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  pointer-events: none;
+  animation: scenarioOrbFloat 6s ease-in-out infinite;
+}
+
+.scenarioIconWrap {
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--showcase-color), color-mix(in srgb, var(--showcase-color) 65%, #000));
+  box-shadow:
+  0 4px 24px color-mix(in srgb, var(--showcase-color) 25%, transparent),
+  inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  position: relative;
+  z-index: 1;
+  animation: iconEntrance 0.5s cubic-bezier(0.33, 1, 0.68, 1) 0.15s both;
+}
+
+.scenarioIconWrap svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+
+.scenarioTitle {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.35;
+  position: relative;
+  z-index: 1;
+  animation: textSlideUp 0.5s cubic-bezier(0.33, 1, 0.68, 1) 0.25s both;
+}
+
+.scenarioBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--showcase-color) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--showcase-color) 20%, transparent);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--showcase-color);
+  position: relative;
+  z-index: 1;
+  animation: textSlideUp 0.5s cubic-bezier(0.33, 1, 0.68, 1) 0.35s both;
+}
+
+.scenarioBadge span {
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .scenarioCol {
+    flex-direction: row;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-xl);
+    text-align: left;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .scenarioCol::before {
+    background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--showcase-color) 8%, transparent) 0%,
+    color-mix(in srgb, var(--showcase-color) 2%, transparent) 100%
+    );
+  }
+  .scenarioCol::after {
+    display: none;
+  }
+  .scenarioIconWrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    flex-shrink: 0;
+  }
+  .scenarioIconWrap svg {
+    width: 22px;
+    height: 22px;
+  }
+  .scenarioBadge {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .scenarioCol {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-lg);
+  }
+}
+
+@media (min-width: 2561px) {
+  .scenarioIconWrap {
+    width: 80px;
+    height: 80px;
+    border-radius: 24px;
+  }
+  .scenarioIconWrap svg {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .scenarioCol {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-xl);
+  }
+  .scenarioIconWrap {
+    width: 100px;
+    height: 100px;
+    border-radius: 28px;
+  }
+  .scenarioIconWrap svg {
+    width: 42px;
+    height: 42px;
+  }
+}

@@ -1,0 +1,939 @@
+/* ============================================================
+   Command Deck — Mobile Navigation Panel
+   A right-sliding glassmorphic side panel with staggered
+   spring animations, icon cards, and category showcase.
+   ============================================================ */
+
+/* ─── Backdrop Overlay ─── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-mobile-menu);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px) saturate(1.3);
+  -webkit-backdrop-filter: blur(6px) saturate(1.3);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.35s;
+}
+
+.overlayOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ─── Side Panel ─── */
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: calc(var(--z-mobile-menu) + 1);
+  width: min(85vw, 380px);
+  background: var(--panel-bg, var(--color-bg));
+  border-left: 1px solid var(--color-border-light);
+  box-shadow:
+    -16px 0 64px rgba(0, 0, 0, 0.3),
+    -4px 0 16px rgba(0, 0, 0, 0.15),
+    inset 1px 0 0 rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  transform: translateX(102%);
+  transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: transform;
+}
+
+.overlayOpen ~ .panel,
+.panelOpen {
+  transform: translateX(0);
+}
+
+/* Scrollbar styling */
+.panel::-webkit-scrollbar {
+  width: 3px;
+}
+.panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.panel::-webkit-scrollbar-thumb {
+  background: rgba(108, 99, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Edge glow accent on left border */
+.panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(108, 99, 255, 0.4) 30%,
+    rgba(168, 85, 247, 0.3) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Panel Header ─── */
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    opacity 0.4s ease 0.08s,
+    transform 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.08s;
+}
+
+.panelOpen .panelHeader {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandLogo {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.2);
+}
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brandName {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--color-text) 40%, var(--color-primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.versionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(108, 99, 255, 0.1);
+  border: 1px solid rgba(108, 99, 255, 0.12);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--color-primary-light);
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+
+.versionDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  color: var(--color-text);
+  background: rgba(108, 99, 255, 0.08);
+  border-color: rgba(108, 99, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.closeBtn:active {
+  transform: rotate(90deg) scale(0.9);
+}
+
+.closeSvg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Panel Body (scrollable middle) ─── */
+.panelBody {
+  flex: 1;
+  padding: 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ─── Navigation Section Label ─── */
+.sectionLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  padding: 0 8px;
+  margin-bottom: 2px;
+  opacity: 0;
+  transform: translateX(16px);
+  transition:
+    opacity 0.35s ease var(--stagger-delay, 0.1s),
+    transform 0.45s cubic-bezier(0.32, 0.72, 0, 1) var(--stagger-delay, 0.1s);
+}
+
+.panelOpen .sectionLabel {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Navigation Cards ─── */
+.navCards {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navCard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateX(24px);
+  transition:
+    opacity 0.35s ease var(--stagger-delay, 0.15s),
+    transform 0.5s cubic-bezier(0.32, 0.72, 0, 1) var(--stagger-delay, 0.15s),
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.panelOpen .navCard {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.navCard:hover {
+  background: var(--header-highlight-bg);
+  border-color: rgba(108, 99, 255, 0.08);
+}
+
+.navCard:active {
+  transform: scale(0.98) !important;
+  transition-duration: 0.1s;
+}
+
+/* Active indicator — left gradient bar */
+.navCard[data-active="true"] {
+  background: rgba(108, 99, 255, 0.08);
+  border-color: rgba(108, 99, 255, 0.15);
+}
+
+.navCard[data-active="true"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--color-primary), var(--color-primary-light));
+  animation: slideInLeft 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navCardIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(59, 130, 246, 0.06));
+  border: 1px solid rgba(108, 99, 255, 0.1);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+.navCard:hover .navCardIconWrap {
+  transform: scale(1.06);
+  box-shadow: 0 2px 12px rgba(108, 99, 255, 0.15);
+}
+
+.navCard[data-active="true"] .navCardIconWrap {
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.18), rgba(168, 85, 247, 0.1));
+  border-color: rgba(108, 99, 255, 0.2);
+}
+
+.navCardIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-primary-light);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.navCard:hover .navCardIcon,
+.navCard[data-active="true"] .navCardIcon {
+  opacity: 1;
+}
+
+.navCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.navCardLabel {
+  font-size: 0.88rem;
+  font-weight: 650;
+  color: var(--color-text);
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.navCard[data-active="true"] .navCardLabel {
+  color: var(--color-primary-light);
+}
+
+.navCardDesc {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Arrow indicator */
+.navCardArrow {
+  width: 14px;
+  height: 14px;
+  color: var(--color-text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.navCard:hover .navCardArrow {
+  opacity: 0.6;
+  transform: translateX(0);
+}
+
+/* ─── Category Showcase Strip ─── */
+.categorySection {
+  padding: 4px 0 8px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    opacity 0.35s ease var(--stagger-delay, 0.35s),
+    transform 0.5s cubic-bezier(0.32, 0.72, 0, 1) var(--stagger-delay, 0.35s);
+}
+
+.panelOpen .categorySection {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.categoryStrip {
+  display: flex;
+  gap: 8px;
+  padding: 4px 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.categoryStrip::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.categoryPill:hover {
+  transform: translateY(-1px);
+}
+
+.categoryDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Category color variants */
+.catCurrency {
+  background: rgba(102, 187, 106, 0.1);
+  border-color: rgba(102, 187, 106, 0.15);
+  color: #66BB6A;
+}
+.catCurrency .categoryDot {
+  background: linear-gradient(135deg, #66BB6A, #2E7D32);
+}
+
+.catDistance {
+  background: rgba(66, 165, 245, 0.1);
+  border-color: rgba(66, 165, 245, 0.15);
+  color: #42A5F5;
+}
+.catDistance .categoryDot {
+  background: linear-gradient(135deg, #42A5F5, #1565C0);
+}
+
+.catApparel {
+  background: rgba(171, 71, 188, 0.1);
+  border-color: rgba(171, 71, 188, 0.15);
+  color: #AB47BC;
+}
+.catApparel .categoryDot {
+  background: linear-gradient(135deg, #AB47BC, #6A1B9A);
+}
+
+.catStorage {
+  background: rgba(38, 198, 218, 0.1);
+  border-color: rgba(38, 198, 218, 0.15);
+  color: #26C6DA;
+}
+.catStorage .categoryDot {
+  background: linear-gradient(135deg, #26C6DA, #00838F);
+}
+
+.catMass {
+  background: rgba(255, 167, 38, 0.1);
+  border-color: rgba(255, 167, 38, 0.15);
+  color: #FFA726;
+}
+.catMass .categoryDot {
+  background: linear-gradient(135deg, #FFA726, #E65100);
+}
+
+/* ─── Divider ─── */
+.divider {
+  height: 1px;
+  border: none;
+  margin: 4px 8px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--color-border-light) 30%,
+    var(--color-border-light) 70%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease var(--stagger-delay, 0.4s);
+}
+
+.panelOpen .divider {
+  opacity: 1;
+}
+
+/* ─── Utility Row (Support + Theme) ─── */
+.utilityRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 4px;
+  opacity: 0;
+  transform: translateX(16px);
+  transition:
+    opacity 0.35s ease var(--stagger-delay, 0.4s),
+    transform 0.45s cubic-bezier(0.32, 0.72, 0, 1) var(--stagger-delay, 0.4s);
+}
+
+.panelOpen .utilityRow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.utilityItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.utilityItem:hover {
+  color: var(--color-text);
+  background: var(--header-highlight-bg);
+}
+
+.utilityIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.utilityItem:hover .utilityIcon {
+  color: var(--color-primary-light);
+}
+
+.utilityLabel {
+  flex: 1;
+}
+
+.themeControl {
+  margin-left: auto;
+}
+
+/* ─── Panel Footer (CTA) ─── */
+.panelFooter {
+  padding: 12px 16px 20px;
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.4s ease var(--stagger-delay, 0.5s),
+    transform 0.45s cubic-bezier(0.32, 0.72, 0, 1) var(--stagger-delay, 0.5s);
+}
+
+.panelOpen .panelFooter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ctaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 24px;
+  border-radius: 14px;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      135deg,
+      hsl(254, 88%, 60%) 0%,
+      hsl(270, 76%, 54%) 35%,
+      hsl(290, 72%, 50%) 65%,
+      hsl(320, 80%, 56%) 100%
+    );
+  background-size: 250% 250%;
+  animation: auroraShift 8s ease infinite;
+  box-shadow:
+    0 4px 20px rgba(108, 99, 255, 0.25),
+    0 1px 3px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow:
+    0 8px 28px rgba(108, 99, 255, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.ctaButton:active {
+  transform: scale(0.97);
+  transition-duration: 0.1s;
+}
+
+.ctaIcon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.9;
+}
+
+.ctaLabel {
+  position: relative;
+}
+
+/* Shimmer overlay on CTA */
+.ctaButton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  background-position: 200% 0;
+  pointer-events: none;
+}
+
+.ctaButton:hover::after {
+  animation: shimmer 2s ease-in-out;
+}
+
+/* ─── Animations ─── */
+@keyframes auroraShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+@keyframes slideInLeft {
+  from { transform: scaleY(0); opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* ─── Ultra-small ≤ 320px ─── */
+@media (max-width: 320px) {
+  .panel {
+    width: 100vw;
+  }
+  .panelHeader {
+    padding: 16px 14px 12px;
+  }
+  .brandLogo {
+    width: 32px;
+    height: 32px;
+  }
+  .brandName {
+    font-size: 0.88rem;
+  }
+  .panelBody {
+    padding: 12px 10px 8px;
+  }
+  .navCard {
+    padding: 10px 10px;
+    gap: 10px;
+  }
+  .navCardIconWrap {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+  .navCardIcon {
+    width: 15px;
+    height: 15px;
+  }
+  .navCardLabel {
+    font-size: 0.82rem;
+  }
+  .navCardDesc {
+    font-size: 0.6rem;
+  }
+  .categoryPill {
+    padding: 5px 9px;
+    font-size: 0.58rem;
+  }
+  .panelFooter {
+    padding: 10px 12px 16px;
+  }
+  .ctaButton {
+    padding: 11px 20px;
+    font-size: 0.82rem;
+  }
+  .closeBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  .closeSvg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* ─── Small phone 321–400px ─── */
+@media (min-width: 321px) and (max-width: 400px) {
+  .panel {
+    width: 88vw;
+  }
+  .navCardDesc {
+    font-size: 0.64rem;
+  }
+}
+
+/* ─── Standard phone 401–480px ─── */
+@media (min-width: 401px) and (max-width: 480px) {
+  .panel {
+    width: 82vw;
+  }
+}
+
+/* ─── Upper phone / small tablet 481–640px ─── */
+@media (min-width: 481px) and (max-width: 640px) {
+  .panel {
+    width: min(75vw, 380px);
+  }
+}
+
+/* ─── Tablet 641–768px ─── */
+@media (min-width: 641px) and (max-width: 768px) {
+  .panel {
+    width: min(60vw, 400px);
+  }
+  .navCard {
+    padding: 14px 16px;
+  }
+  .navCardIconWrap {
+    width: 44px;
+    height: 44px;
+  }
+  .navCardIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ─── Large tablet 769–1024px ─── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .panel {
+    width: min(50vw, 420px);
+  }
+  .panelHeader {
+    padding: 24px 24px 18px;
+  }
+  .panelBody {
+    padding: 20px 20px 12px;
+  }
+  .navCard {
+    padding: 14px 16px;
+    gap: 16px;
+  }
+  .navCardIconWrap {
+    width: 44px;
+    height: 44px;
+  }
+  .navCardIcon {
+    width: 20px;
+    height: 20px;
+  }
+  .navCardLabel {
+    font-size: 0.92rem;
+  }
+  .navCardDesc {
+    font-size: 0.72rem;
+  }
+  .panelFooter {
+    padding: 16px 20px 24px;
+  }
+}
+
+/* ─── Desktop 1025px+ (panel hidden, use desktop nav) ─── */
+@media (min-width: 1025px) {
+  .overlay,
+  .panel {
+    display: none !important;
+  }
+}
+
+/* ─── Landscape phones ─── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .panel {
+    width: min(50vw, 340px);
+  }
+  .panelHeader {
+    padding: 10px 16px 8px;
+  }
+  .brandLogo {
+    width: 28px;
+    height: 28px;
+  }
+  .brandName {
+    font-size: 0.82rem;
+  }
+  .versionBadge {
+    display: none;
+  }
+  .panelBody {
+    padding: 6px 10px 4px;
+    gap: 2px;
+  }
+  .sectionLabel {
+    display: none;
+  }
+  .navCard {
+    padding: 7px 10px;
+    gap: 10px;
+  }
+  .navCardIconWrap {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+  .navCardIcon {
+    width: 14px;
+    height: 14px;
+  }
+  .navCardLabel {
+    font-size: 0.78rem;
+  }
+  .navCardDesc {
+    display: none;
+  }
+  .categorySection {
+    display: none;
+  }
+  .divider {
+    margin: 2px 8px;
+  }
+  .utilityItem {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+  .panelFooter {
+    padding: 6px 12px 12px;
+  }
+  .ctaButton {
+    padding: 9px 16px;
+    font-size: 0.78rem;
+    border-radius: 10px;
+  }
+}
+
+/* ─── 4K+ ─── */
+@media (min-width: 2561px) {
+  .panel {
+    width: min(25vw, 480px);
+  }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+  }
+  .panelHeader,
+  .sectionLabel,
+  .navCard,
+  .categorySection,
+  .divider,
+  .utilityRow,
+  .panelFooter {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .ctaButton {
+    animation: none;
+  }
+  .ctaButton::after {
+    animation: none;
+  }
+  .versionDot {
+    animation: none;
+  }
+  .closeBtn:hover {
+    transform: none;
+  }
+}
+
+/* ─── Light theme adjustments ─── */
+:global([data-theme="light"]) .panel {
+  --panel-bg: rgba(255, 255, 255, 0.97);
+  box-shadow:
+    -16px 0 64px rgba(0, 0, 0, 0.1),
+    -4px 0 16px rgba(0, 0, 0, 0.06),
+    inset 1px 0 0 rgba(0, 0, 0, 0.03);
+}
+
+:global([data-theme="light"]) .overlay {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* ─── AMOLED theme adjustments ─── */
+:global([data-theme="amoled"]) .panel {
+  --panel-bg: rgba(0, 0, 0, 0.98);
+  border-left-color: rgba(108, 99, 255, 0.08);
+}

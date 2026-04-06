@@ -1,0 +1,177 @@
+.footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg);
+  isolation: isolate;
+}
+
+.aurora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+.auroraOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  will-change: transform;
+  animation: auroraFloat 18s ease-in-out infinite;
+}
+
+.auroraOrb:nth-child(1) {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--color-primary-start), transparent 70%);
+  top: -10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.auroraOrb:nth-child(2) {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--color-currency-start), transparent 70%);
+  bottom: -20%;
+  right: 5%;
+  animation-delay: -6s;
+  animation-duration: 22s;
+}
+
+.auroraOrb:nth-child(3) {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, var(--color-apparel-start), transparent 70%);
+  top: 40%;
+  left: 55%;
+  animation-delay: -12s;
+  animation-duration: 26s;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-3xl) 0 0;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.8fr 0.8fr;
+  gap: clamp(2rem, 4vw, 5rem);
+  padding-bottom: var(--space-2xl);
+}
+
+.categoryPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--space-xs);
+}
+
+.categoryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.03em;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: default;
+  will-change: transform, box-shadow;
+}
+
+.categoryPill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  border-color: var(--color-border-light);
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+@media (max-width: 640px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  .auroraOrb {
+    filter: blur(70px);
+  }
+  .auroraOrb:nth-child(1) {
+    width: 280px;
+    height: 280px;
+  }
+  .auroraOrb:nth-child(2) {
+    width: 220px;
+    height: 220px;
+  }
+  .auroraOrb:nth-child(3) {
+    width: 180px;
+    height: 180px;
+  }
+  .categoryPills {
+    gap: 6px;
+  }
+  .categoryPill {
+    padding: 4px 10px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .mainGrid {
+    grid-template-columns: 1.6fr 1fr 0.8fr 0.8fr;
+    gap: 5rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  .content {
+    padding-top: clamp(5rem, 6vw, 8rem);
+  }
+  .auroraOrb:nth-child(1) {
+    width: 800px;
+    height: 800px;
+  }
+  .auroraOrb:nth-child(2) {
+    width: 650px;
+    height: 650px;
+  }
+  .auroraOrb:nth-child(3) {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .content {
+    padding-top: 10rem;
+  }
+  .mainGrid {
+    gap: 8rem;
+  }
+  .categoryPill {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auroraOrb {
+    animation: none;
+  }
+  .categoryPill:hover {
+    transform: none;
+  }
+}

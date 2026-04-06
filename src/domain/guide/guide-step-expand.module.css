@@ -1,0 +1,223 @@
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes tagReveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.chevron {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+  color 0.25s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+  color: var(--color-primary-light);
+}
+
+.expandWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.expandWrapperOpen {
+  grid-template-rows: 1fr;
+}
+
+.expandInner {
+  overflow: hidden;
+}
+
+.detailCallout {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  border-left: 3px solid transparent;
+  border-image: linear-gradient(
+  180deg,
+  var(--color-primary-start),
+  var(--color-primary-end)
+  ) 1;
+}
+
+.detailCalloutIcon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: var(--color-primary-light);
+  opacity: 0.8;
+}
+
+.detailCalloutText {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.featureCard::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+  circle,
+  rgba(108, 99, 255, 0.08) 0%,
+  transparent 70%
+  );
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.featureIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+  135deg,
+  var(--color-primary-start),
+  var(--color-primary-end)
+  );
+  box-shadow: 0 6px 24px rgba(108, 99, 255, 0.3);
+  position: relative;
+  z-index: 1;
+  animation: iconFloat 5s ease-in-out infinite;
+}
+
+.featureHighlight {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.featureTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.featureTag {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  opacity: 0;
+  animation: tagReveal 0.3s ease forwards;
+  animation-delay: var(--tag-delay, 0ms);
+}
+
+@media (max-width: 768px) {
+  .featureCard {
+    flex-direction: row;
+    gap: var(--space-md);
+    padding: var(--space-md);
+  }
+  .featureCard::before {
+    width: 120px;
+    height: 120px;
+  }
+  .featureIcon {
+    width: 44px;
+    height: 44px;
+  }
+  .featureIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .featureHighlight {
+    text-align: left;
+    font-size: var(--text-xs);
+  }
+  .featureTags {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .detailCallout {
+    padding: var(--space-sm) var(--space-md);
+  }
+  .chevron {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .featureCard {
+    padding: var(--space-sm);
+  }
+}
+
+@media (min-width: 2561px) {
+  .featureIcon {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expandWrapper {
+    transition: none;
+  }
+  .featureIcon {
+    animation: none;
+  }
+  .featureTag {
+    opacity: 1;
+    animation: none;
+  }
+  .chevron {
+    transition: none;
+  }
+}

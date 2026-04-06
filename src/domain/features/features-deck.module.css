@@ -1,0 +1,233 @@
+@keyframes orbBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes contentFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.deck {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 0;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 560px;
+  transition: box-shadow 0.4s ease;
+}
+
+.deck:hover {
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.15);
+}
+
+.iconOrb {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--feature-accent, var(--color-primary)) 10%, var(--color-bg-card));
+  border: 1px solid color-mix(in srgb, var(--feature-accent, var(--color-primary)) 18%, transparent);
+  box-shadow: 0 8px 40px color-mix(in srgb, var(--feature-accent, var(--color-primary)) 15%, transparent);
+  transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+  animation: orbBreath 4s ease-in-out infinite;
+  margin-bottom: var(--space-xl);
+}
+
+.iconOrb svg {
+  width: 48px;
+  height: 48px;
+  color: var(--feature-accent, var(--color-primary));
+  transition: color 0.5s ease;
+}
+
+.featureNum {
+  font-size: var(--text-4xl);
+  font-weight: 900;
+  color: var(--feature-accent, var(--color-primary));
+  opacity: 0.08;
+  position: absolute;
+  bottom: var(--space-lg);
+  right: var(--space-xl);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  transition: color 0.5s ease;
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2xl);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.contentInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: contentFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 80ms;
+}
+
+.exclusiveBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.18);
+  color: #fbbf24;
+}
+
+.exclusiveBadge svg {
+  width: 10px;
+  height: 10px;
+}
+
+.contentTitle {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.contentDesc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.85;
+}
+
+@media (min-width: 1441px) {
+  .deck {
+    grid-template-columns: auto auto 1fr;
+    min-height: 620px;
+  }
+  .iconOrb {
+    width: 140px;
+    height: 140px;
+    border-radius: 36px;
+  }
+  .iconOrb svg {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (min-width: 2561px) {
+  .deck {
+    grid-template-columns: auto auto 1fr;
+    min-height: 700px;
+  }
+  .iconOrb {
+    width: 160px;
+    height: 160px;
+    border-radius: 40px;
+  }
+  .iconOrb svg {
+    width: 68px;
+    height: 68px;
+  }
+  .contentTitle {
+    font-size: var(--text-3xl);
+  }
+}
+
+@media (max-width: 1024px) {
+  .deck {
+    grid-template-columns: auto auto 1fr;
+    min-height: 480px;
+  }
+  .iconOrb {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .iconOrb svg {
+    width: 32px;
+    height: 32px;
+  }
+  .featureNum {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .deck {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  .iconOrb {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .iconOrb svg {
+    width: 28px;
+    height: 28px;
+  }
+  .featureNum {
+    display: none;
+  }
+  .contentCol {
+    padding: var(--space-lg);
+  }
+  .contentTitle {
+    font-size: var(--text-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .iconOrb {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+  .iconOrb svg {
+    width: 22px;
+    height: 22px;
+  }
+  .contentCol {
+    padding: var(--space-md);
+  }
+  .contentInner {
+    gap: var(--space-md);
+  }
+  .contentTitle {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iconOrb {
+    animation: none;
+  }
+  .contentInner {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
